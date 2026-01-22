@@ -193,7 +193,7 @@
 
             <div class="contact-form">
                 <h3>Rimani in contatto</h3>
-                <form action="https://api.web3forms.com/submit" method="POST">
+                <form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
                     <input type="hidden" name="access_key" value="33625e5d-754a-428e-ac82-ddbb712275bf">
                     <div class="form-group">
                         <label for="name">Nome e Cognome*</label>
@@ -215,6 +215,8 @@
                         <textarea id="message" name="message" rows="5" placeholder="Scrivi qui il tuo messaggio..." required></textarea>
                     </div>
 
+                    <div class="h-captcha" data-lang="it" data-captcha="true"></div>
+                    
                     <button type="submit" class="submit-button">Invia messaggio</button>
                     <p class="form-note">*Campi obbligatori per concordare un primo incontro.</p>
                 </form>
@@ -272,5 +274,19 @@
             });
         });
     </script>
+
+<script>
+const form = document.getElementById('contact-form');
+form.addEventListener('submit', function(e) {
+    const hCaptcha = form.querySelector('textarea[name=h-captcha-response]').value;
+
+    if (!hCaptcha) {
+        e.preventDefault();
+        alert("Clicca sulla checkbox \"sono un umano\" prima di inviare il form")
+        return
+    }
+});
+</script>
+<script src="https://web3forms.com/client/script.js" async defer></script>
 </body>
 </html>
